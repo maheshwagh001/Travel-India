@@ -69,7 +69,7 @@ header .logo h5 {
     align-items: center;
 }
 
-@media only screen and (max-width: 430px) {
+/* @media only screen and (max-width: 430px) {
     header .averager {
         padding: 0 1rem;
     }
@@ -77,7 +77,7 @@ header .logo h5 {
     .search-form {
         display: none;
     }
-}
+} */
 
 .search-form input {
     width: 100%;
@@ -179,3 +179,22 @@ header .logo h5 {
     margin-top: -5px;
 }
 
+@media (max-width: 1000px) {
+    header .logo h5 {
+        font-size: 2.2ex;
+    }
+    .header_options div.noAuth_options a,
+.header_options div.auth_options a.addStory-link {
+    font-size: 2.2ex;
+}
+  }
+  
+  @media (max-width: 800px) {
+    header .logo h5 {
+        font-size: 1.7ex;
+    }
+    .header_options div.noAuth_options a,
+.header_options div.auth_options a.addStory-link {
+    font-size: 1.7ex;
+}
+  }

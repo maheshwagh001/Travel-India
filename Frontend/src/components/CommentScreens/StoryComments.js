@@ -2,7 +2,7 @@ import React from 'react';
 import CommentItem from './CommentItem';
 import '../../Css/StoryComments.css'
 
-const StoryComments = ({ commentlist, count, activeUser }) => {
+const StoryComments = ({ commentlist, count, activeUser,getStoryComments }) => {
 
     return (
         <>
@@ -13,7 +13,7 @@ const StoryComments = ({ commentlist, count, activeUser }) => {
                         {
                             commentlist.map((comment) => {
                                 return (
-                                    <CommentItem key={comment._id} comment={comment} activeUser={activeUser} />
+                                    <CommentItem key={comment._id} comment={comment} activeUser={activeUser} getStoryComments={getStoryComments} count={count}/>
                                 )
                             })
                         }

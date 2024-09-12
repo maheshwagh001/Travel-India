@@ -55,22 +55,14 @@
     color: rgb(128, 128, 128);
 }
 
-@media only screen and (max-width: 1030px) {
-    .Inclusive_profile_page {
-        width: 94%;
-    }
-    .Inclusive_profile_page ul li div {
-        font-size: 0.9rem;
-        width: 175px;
-    }
-}
+
 
 .btns_wrap {
-    /* width: 1000px; */
-    /* display: flex; */
+    width: 100px;
+    display: inline;
     text-align: center;
     font-weight: bold;
-    /* padding: 25px 0; */
+    padding: 25px 0;
     justify-content: flex-start;
 }
 
@@ -79,8 +71,8 @@
     margin-bottom: 2rex;
 }
 
-.btns_wrap .profileEditBtn a {
-    width: 60rex;
+ .profileEditBtn a {
+    width: 70rex;
     border: 1px solid #0063a5;
     color: #0063a5;
     border-radius: 3px;
@@ -91,7 +83,7 @@
     align-items: center;
     justify-content: center;
     font-family: 'Mukta', sans-serif;
-    margin-left: 2rem;
+    /* margin-left: 2rem; */
     font-size: 0.9rem;
     transition: 350ms ease;
 }
@@ -121,4 +113,18 @@
     color: white;
     text-decoration: none;
     background-color: #0063a5;
+}
+
+
+@media only screen and (max-width: 1030px) {
+    .Inclusive_profile_page {
+        width: 94%;
+    }
+    .Inclusive_profile_page ul li div {
+        font-size: 0.9rem;
+        width: 110px;
+    }
+    .profileEditBtn a {
+        width: 45rex;
+    }
 }

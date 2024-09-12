@@ -7,6 +7,7 @@ import { AuthContext } from '../../Context/AuthContext';
 import { FiArrowLeft } from 'react-icons/fi'
 
 import Mypost from './Mypost';
+import { baseUrl } from '../../Urls';
 
 const Profile = () => {
     const { config } = useContext(AuthContext)
@@ -31,7 +32,7 @@ const Profile = () => {
             setLoading(true)
 
             try {
-                const { data } = await axios.get("/user/profile", config)
+                const { data } = await axios.get(`${baseUrl}/user/profile`, config)
 
                 setUser(data.data)
 

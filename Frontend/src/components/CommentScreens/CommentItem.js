@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { FaRegHeart, FaHeart } from 'react-icons/fa'
-import { BsThreeDots } from 'react-icons/bs'
+import { RiDeleteBin6Line } from 'react-icons/ri'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { baseUrl } from '../../Urls';
 
-const CommentItem = ({ comment, activeUser }) => {
+const CommentItem = ({ comment, activeUser,getStoryComments, count  }) => {
     const navigate = useNavigate()
     const [likeCount, setLikeCount] = useState(comment.likeCount)
     const [likeStatus, setLikeStatus] = useState(false)
@@ -15,7 +16,7 @@ const CommentItem = ({ comment, activeUser }) => {
 
             const comment_id = comment._id
             try {
-                const { data } = await axios.post(`/comment/${comment_id}/getCommentLikeStatus`, { activeUser }, {
+                const { data } = await axios.post(`${baseUrl}/comment/${comment_id}/getCommentLikeStatus`, { activeUser }, {
                     headers: {
                         "Content-Type": "application/json",
                         authorization: `Bearer ${localStorage.getItem("authToken")}`,
@@ -48,7 +49,7 @@ const CommentItem = ({ comment, activeUser }) => {
             if(activeUser._id == null){
                 navigate("/login");
               }
-            const { data } = await axios.post(`/comment/${comment_id}/like`, { activeUser }, {
+            const { data } = await axios.post(`${baseUrl}/comment/${comment_id}/like`, { activeUser }, {
                 headers: {
                     "Content-Type": "application/json",
                     authorization: `Bearer ${localStorage.getItem("authToken")}`,
@@ -63,6 +64,35 @@ const CommentItem = ({ comment, activeUser }) => {
             localStorage.removeItem("authToken")
         }
     }
+
+    const handleDelete = async () => {
+
+        if (window.confirm("Do you want to delete this comment")) {
+            
+            const comment_id = comment._id
+            // console.log(activeUser)
+          try {
+    
+            await axios.delete(`${baseUrl}/comment/${comment_id}/delete`, {
+              headers: {
+                "Content-Type": "application/json",
+                authorization: `Bearer ${localStorage.getItem("authToken")}`,
+              },
+            })
+            getStoryComments();
+            setTimeout(() => {
+                document.querySelector(".commentCount").textContent = count - 1;
+            }, 650);
+    
+          }
+          catch (error) {
+            navigate("/blog")
+            console.log(error)
+          }
+    
+        }
+    
+      }
 
     return (
 
@@ -79,7 +109,14 @@ const CommentItem = ({ comment, activeUser }) => {
                 </section>
 
                 <section>
-                    <BsThreeDots />
+                {activeUser && comment.author &&
+                    (comment.author._id === activeUser._id || activeUser.role === "admin")?
+                        <span onClick={handleDelete}>
+                            <RiDeleteBin6Line />
+                        </span>
+                      :
+                      null
+                      }
                 </section>
             </div>
 

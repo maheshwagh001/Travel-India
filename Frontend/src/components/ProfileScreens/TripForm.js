@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import '../../Css/Planner.css';
+import { baseUrl } from '../../Urls';
 
 const TripForm = ({ setItinerary, setLoading }) => {
   const [destination, setDestination] = useState('');
@@ -22,7 +23,7 @@ const TripForm = ({ setItinerary, setLoading }) => {
     e.preventDefault();
     setLoading(true);
       try {
-        const response = await axios.post(`/user/planner`, {
+        const response = await axios.post(`${baseUrl}/user/planner`, {
           destination,
           startDate,
           endDate,

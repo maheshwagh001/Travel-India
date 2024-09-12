@@ -6,6 +6,7 @@ import Loader from "../GeneralScreens/Loader";
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthContext';
 import '../../Css/EditProfile.css'
+import { baseUrl } from '../../Urls';
 
 const EditProfile = () => {
     const { activeUser, config } = useContext(AuthContext)
@@ -28,7 +29,7 @@ const EditProfile = () => {
         formdata.append("previousPhoto ", previousPhoto)
 
         try {
-            const { data } = await axios.post("/user/editProfile", formdata, config)
+            const { data } = await axios.post(`${baseUrl}/user/editProfile`, formdata, config)
 
             setSuccess('Edit Profile successfully ')
             setTimeout(() => {

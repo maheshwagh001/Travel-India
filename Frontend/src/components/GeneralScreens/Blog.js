@@ -8,6 +8,7 @@ import Loader from "./Loader";
 import "../../Css/Blog.css"
 
 import { useNavigate } from "react-router-dom"
+import { baseUrl } from "../../Urls";
 const Home = () => {
   const search = useLocation().search
   const searchKey = new URLSearchParams(search).get('search')
@@ -21,7 +22,7 @@ const Home = () => {
 
       setLoading(true)
       try {
-        const { data } = await axios.get(`/story/getAllStories?search=${searchKey || ""}`)
+        const { data } = await axios.get(`${baseUrl}/story/getAllStories?search=${searchKey || ""}`)
 
         setStories(data.data)
 

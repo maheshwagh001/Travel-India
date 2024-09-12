@@ -9,6 +9,7 @@ import { BsThreeDots } from 'react-icons/bs'
 import ReadListStoryItem from '../StoryScreens/ReadListStoryItem';
 
 import '../../Css/ReadListPage.css'
+import { baseUrl } from '../../Urls';
 
 const ReadListPage = () => {
     const navigate = useNavigate();
@@ -21,7 +22,7 @@ const ReadListPage = () => {
             setLoading(true)
 
             try {
-                const { data } = await (await axios.get(`/user/readList`, config)).data
+                const { data } = await (await axios.get(`${baseUrl}/user/readList`, config)).data
                 setReadList(data)
                 setLoading(false)
             }

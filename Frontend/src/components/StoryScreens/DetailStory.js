@@ -9,6 +9,7 @@ import { FiEdit} from 'react-icons/fi'
 import { FaRegComment } from 'react-icons/fa'
 import { BsBookmarkPlus, BsBookmarkFill } from 'react-icons/bs'
 import CommentSidebar from '../CommentScreens/CommentSidebar';
+import { baseUrl } from '../../Urls';
 
 const DetailStory = () => {
   const [likeStatus, setLikeStatus] = useState(false)
@@ -28,7 +29,7 @@ const DetailStory = () => {
       setLoading(true)
       var activeUser = {}
       try {
-        const { data } = await axios.get("/auth/private", {
+        const { data } = await axios.get(`${baseUrl}/auth/private`, {
           headers: {
             "Content-Type": "application/json",
             authorization: `Bearer ${localStorage.getItem("authToken")}`,
@@ -44,7 +45,7 @@ const DetailStory = () => {
       }
 
       try {
-        const { data } = await axios.post(`/story/${slug}`, { activeUser })
+        const { data } = await axios.post(`${baseUrl}/story/${slug}`, { activeUser })
         setStory(data.data)
         setLikeStatus(data.likeStatus)
         setLikeCount(data.data.likeCount)
@@ -87,7 +88,7 @@ const DetailStory = () => {
       if(activeUser._id == null){
         navigate("/login");
       }
-      const { data } = await axios.post(`/story/${slug}/like`, { activeUser }, {
+      const { data } = await axios.post(`${baseUrl}/story/${slug}/like`, { activeUser }, {
         headers: {
           "Content-Type": "application/json",
           authorization: `Bearer ${localStorage.getItem("authToken")}`,
@@ -111,13 +112,13 @@ const DetailStory = () => {
 
       try {
 
-        await axios.delete(`/story/${slug}/delete`, {
+        await axios.delete(`${baseUrl}/story/${slug}/delete`, {
           headers: {
             "Content-Type": "application/json",
             authorization: `Bearer ${localStorage.getItem("authToken")}`,
           },
         })
-        navigate("/")
+        navigate("/blog")
 
       }
       catch (error) {
@@ -143,7 +144,7 @@ const DetailStory = () => {
         navigate("/login");
       }
 
-      const { data } = await axios.post(`/user/${slug}/addStoryToReadList`, { activeUser }, {
+      const { data } = await axios.post(`${baseUrl}/user/${slug}/addStoryToReadList`, { activeUser }, {
         headers: {
           "Content-Type": "application/json",
           authorization: `Bearer ${localStorage.getItem("authToken")}`,
@@ -201,7 +202,7 @@ const DetailStory = () => {
                   </ul>
 
                   {activeUser && story.author &&
-                    story.author._id === activeUser._id ?
+                    (story.author._id === activeUser._id || activeUser.role === "admin") ?
                     <div className="top_story_transactions">
                       <Link className='editStoryLink' to={`/story/${story.slug}/edit`}>
                         <FiEdit />

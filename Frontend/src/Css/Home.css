@@ -1,7 +1,7 @@
 /* src/components/LandingPage.css */
 
 body {
-  font-family: 'Secular One', sans-serif;
+    font-family: 'Arial, sans-serif';
     margin: 0;
     padding: 0;
   }
@@ -28,6 +28,7 @@ body {
   }
   
   .hero-content h1 {
+    font-family: 'Secular One', sans-serif;
     font-size: 3rem;
     margin-bottom: 1rem;
   }
@@ -44,6 +45,7 @@ body {
   }
   
   .values-section h2 {
+    font-family: 'Secular One', sans-serif;
     font-size: 2rem;
     margin-bottom: 2rem;
   }
@@ -86,6 +88,7 @@ body {
   }
   
   .blog-section h2 {
+    font-family: 'Secular One', sans-serif;
     font-size: 2rem;
     margin-bottom: 2rem;
   }
@@ -146,6 +149,11 @@ body {
     .newsletter-form {
       flex-direction: column;
     }
+    .hero-section {
+      
+      height: 60vh;
+      
+    }
   }
   
   @media (max-width: 800px) {
@@ -179,5 +187,11 @@ body {
     .subscribe-button {
       width: 100%;
     }
+    .hero-section {
+      
+      height: 60vh;
+      
+    }
+    
   }
   

@@ -28,9 +28,9 @@ const App = () => {
 
                                     <Route path='*' element={<NotFound />} />
 
-                                    <Route exact path='/' element={<PrivateRoute />}>
-                                          <Route exact path='/' element={<Home />} />
-                                    </Route>
+                                    
+                                    <Route exact path='/' element={<Home />} />
+                                    
 
                                     <Route exact path="/story/:slug" element={<DetailStory />} />
 
@@ -70,9 +70,9 @@ const App = () => {
                                     <Route exact path='/planner' element={<PrivateRoute />}>
                                           <Route exact path='/planner' element={<Planner />} />
                                     </Route>
-                                    <Route exact path='/blog' element={<PrivateRoute />}>
-                                          <Route exact path='/blog' element={<Blog />} />
-                                    </Route>
+                                    
+                                    <Route exact path='/blog' element={<Blog />} />
+                                    
 
                               </Route>
 

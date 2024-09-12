@@ -4,13 +4,12 @@ import { BsShieldCheck, BsCheckAll } from 'react-icons/bs'
 import { IoAdd } from 'react-icons/io5'
 import { useNavigate } from 'react-router-dom';
 import '../../Css/AddComment.css'
+import { baseUrl } from '../../Urls';
 
 const AddComment = ({ setSidebarShowStatus, slug, getStoryComments, activeUser, count }) => {
 
     const navigate = useNavigate();
     const textareaRef = useRef(null)
-    // const [star, setStar] = useState(0);
-    // const [starCurrentVal, setStarCurrentVal] = useState(0);
     const [content, setContent] = useState('')
     const [success, setSuccess] = useState('')
     const [error, setError] = useState('')
@@ -20,14 +19,14 @@ const AddComment = ({ setSidebarShowStatus, slug, getStoryComments, activeUser, 
 
         e.preventDefault();
         try {
-            await axios.post(`/comment/${slug}/addComment`, { content }, {
+            await axios.post(`${baseUrl}/comment/${slug}/addComment`, { content }, {
                 headers: {
                     "Content-Type": "application/json",
                     authorization: `Bearer ${localStorage.getItem("authToken")}`,
                 },
             })
 
-            setSuccess('Add Comment successfully ')
+            setSuccess('Comment added successfully ')
             setTimeout(() => {
                 setSuccess('')
             }, 2700)
@@ -107,7 +106,6 @@ const AddComment = ({ setSidebarShowStatus, slug, getStoryComments, activeUser, 
                     </div>
 
                     <div className={showStatus ? 'form-bottom-block' : 'form-bottom-block hidden'} >
-                        {/* <StarRating setStar={setStar} setStarCurrentVal={setStarCurrentVal} starCurrentVal={starCurrentVal} /> */}
 
                         <div className="formBtn-wrapper">
                             <button type='button'
