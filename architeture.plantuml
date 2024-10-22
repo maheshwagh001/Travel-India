@@ -33,12 +33,7 @@ MongoDB <-- Cloudinary : secure url
 BackendServer <--> Gemini : Fetch Travel \n Itineraries
 FrontendApp <-- MongoDB : Rendering data
 
-' Add Note to Indicate No Direct Connections
-' note right of FrontendApp
-'     Frontend does not directly connect to:
-'     - Database
-'     - Cloudinary API
-'     - Gemini API
-' end note
 
 @enduml
+
+' https://www.plantuml.com/plantuml/
