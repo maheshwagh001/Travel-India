@@ -1,21 +1,44 @@
 @startuml
-title Fetching Travel Stories Sequence Diagram
+title Travel India Project Architecture
 
-actor User
-participant Frontend as "React Frontend\n(Hosted on Vercel)"
-participant Backend as "Node.js Backend\n(Hosted on Render)"
-participant Database as "MongoDB Database"
+!define RECTANGLE class
 
-User -> Frontend: Request to view/search stories
-Frontend -> Backend: GET /stories\n(search parameters)
-activate Backend
+' Define Frontend
+package "Frontend" {
+    [React Application\n(Hosted on Vercel)] as FrontendApp
+}
 
-Backend -> Database: Query stories based on search parameters   
-activate Database
-Database --> Backend: List of stories
-deactivate Database
+' Define Backend
+package "Backend" {
+    [Node.js + Express.js Server\n(Hosted on Render)] as BackendServer
+}
 
-Backend --> Frontend: 200 OK\n(stories data)
-deactivate Backend
-Frontend --> User: Display stories
+' Define Database
+package "Database" {
+    [MongoDB Database\n(Hosted on MongoDB Atlas)\n\n+Users\n+Stories\n+Comments] as MongoDB
+}
+
+' Define External Services
+package "External Services" {
+    [Cloudinary API\n(Image Storage & Management)] as Cloudinary
+    [Gemini API\n(Travel Itineraries)] as Gemini
+}
+
+' Define Connectivity
+FrontendApp --> BackendServer : http \n Requests
+FrontendApp <-- BackendServer : http \n Responses
+BackendServer -> MongoDB : CRUD Operations\n(Mongoose)
+BackendServer --> Cloudinary : access to buffer \n location by multer
+MongoDB <-- Cloudinary : secure url
+BackendServer <--> Gemini : Fetch Travel \n Itineraries
+FrontendApp <-- MongoDB : Rendering data
+
+' Add Note to Indicate No Direct Connections
+' note right of FrontendApp
+'     Frontend does not directly connect to:
+'     - Database
+'     - Cloudinary API
+'     - Gemini API
+' end note
+
 @enduml
