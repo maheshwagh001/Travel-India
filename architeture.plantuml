@@ -1,0 +1,21 @@
+@startuml
+title Fetching Travel Stories Sequence Diagram
+
+actor User
+participant Frontend as "React Frontend\n(Hosted on Vercel)"
+participant Backend as "Node.js Backend\n(Hosted on Render)"
+participant Database as "MongoDB Database"
+
+User -> Frontend: Request to view/search stories
+Frontend -> Backend: GET /stories\n(search parameters)
+activate Backend
+
+Backend -> Database: Query stories based on search parameters   
+activate Database
+Database --> Backend: List of stories
+deactivate Database
+
+Backend --> Frontend: 200 OK\n(stories data)
+deactivate Backend
+Frontend --> User: Display stories
+@enduml
