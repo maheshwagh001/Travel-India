@@ -25,13 +25,13 @@ package "External Services" {
 }
 
 ' Define Connectivity
-FrontendApp --> BackendServer : http \n Requests
+FrontendApp -> BackendServer : http \n Requests
 FrontendApp <-- BackendServer : http \n Responses
 BackendServer -> MongoDB : CRUD Operations\n(Mongoose)
 BackendServer --> Cloudinary : access to buffer \n location by multer
 MongoDB <-- Cloudinary : secure url
 BackendServer <--> Gemini : Fetch Travel \n Itineraries
-FrontendApp <-- MongoDB : Rendering data
+BackendServer <- MongoDB : Data
 
 
 @enduml
